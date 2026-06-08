@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  phone     String?
+  avatar    String?
+  role      String   @default("USER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings Booking[]
+  reviews  Review[]
+  testimonials Testimonial[]
+}
+
+model Camera {
+  id          Int      @id @default(autoincrement())
+  name        String
+  brand       String
+  category    String
+  description String
+  specs       String
+  pricePerDay Float
+  stock       Int      @default(1)
+  images      String   @default("[]")
+  isAvailable Boolean  @default(true)
+  isDeleted   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  bookings Booking[]
+  reviews  Review[]
+}
+
+model Booking {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  cameraId   Int
+  startDate  DateTime
+  endDate    DateTime
+  totalDays  Int
+  totalPrice Float
+  status     String   @default("PENDING")
+  notes      String?
+  address       String?
+  phone         String?
+  ktpPath       String? // to store uploaded ktp image path
+  paymentMethod String? // to store bank/ewallet name
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id])
+  camera Camera @relation(fields: [cameraId], references: [id])
+  review Review?
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  cameraId  Int
+  bookingId Int      @unique
+  rating    Int
+  comment   String?
+  reply     String?
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id])
+  camera  Camera  @relation(fields: [cameraId], references: [id])
+  booking Booking @relation(fields: [bookingId], references: [id])
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  rating    Int
+  message   String
+  reply     String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
