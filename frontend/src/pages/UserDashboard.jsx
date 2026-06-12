@@ -303,10 +303,10 @@ export default function UserDashboard() {
                   <table className="w-full text-left">
                     <thead>
                       <tr className="bg-surface font-label-bold text-on-surface-variant text-[10px] uppercase tracking-widest">
-                        <th className="px-md py-4">Produk Gear</th>
-                        <th className="px-md py-4 hidden md:table-cell">Deskripsi</th>
-                        <th className="px-md py-4">Harga Sewa</th>
-                        <th className="px-md py-4 text-right pr-md">Aksi</th>
+                        <th className="px-4 md:px-6 py-4">Produk Gear</th>
+                        <th className="px-4 md:px-6 py-4 hidden md:table-cell">Deskripsi</th>
+                        <th className="px-4 md:px-6 py-4 text-right sm:text-left">Harga Sewa</th>
+                        <th className="px-4 md:px-6 py-4 text-right hidden sm:table-cell">Aksi</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-outline-variant">
@@ -338,7 +338,7 @@ export default function UserDashboard() {
                               className="hover:bg-surface transition-colors group cursor-pointer"
                               onClick={() => navigate(`/cameras/${cam.id}`)}
                             >
-                              <td className="px-md py-4">
+                              <td className="px-4 md:px-6 py-4">
                                 <div className="flex items-center gap-md">
                                   <div className="w-16 h-16 bg-surface rounded-xl overflow-hidden shadow-sm flex-shrink-0">
                                     <img className="w-full h-full object-cover" src={imgSrc} alt={cam.name} />
@@ -363,16 +363,16 @@ export default function UserDashboard() {
                                   </div>
                                 </div>
                               </td>
-                              <td className="px-md py-4 font-body-md text-on-surface-variant max-w-xs truncate hidden md:table-cell">
+                              <td className="px-4 md:px-6 py-4 font-body-md text-on-surface-variant max-w-xs truncate hidden md:table-cell">
                                 {cam.description || 'Peralatan fotografi berkualitas tinggi.'}
                               </td>
-                              <td className="px-md py-4 whitespace-nowrap">
+                              <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right sm:text-left">
                                 <p className="font-label-bold text-primary">
                                   Rp {cam.pricePerDay?.toLocaleString('id-ID')}
                                   <span className="text-[10px] text-on-surface-variant font-normal"> / hari</span>
                                 </p>
                               </td>
-                              <td className="px-md py-4 text-right pr-md">
+                              <td className="px-4 md:px-6 py-4 text-right hidden sm:table-cell">
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation()
@@ -411,10 +411,10 @@ export default function UserDashboard() {
                     <table className="w-full text-left">
                       <thead>
                         <tr className="bg-surface font-label-bold text-on-surface-variant text-[10px] uppercase tracking-widest">
-                          <th className="px-md py-4">Gear</th>
-                          <th className="px-md py-4 hidden md:table-cell">Durasi</th>
-                          <th className="px-md py-4 hidden md:table-cell">Total</th>
-                          <th className="px-md py-4 text-right pr-md">Status</th>
+                          <th className="px-4 md:px-6 py-4">Gear</th>
+                          <th className="px-4 md:px-6 py-4 hidden md:table-cell">Durasi</th>
+                          <th className="px-4 md:px-6 py-4 hidden md:table-cell">Total</th>
+                          <th className="px-4 md:px-6 py-4 text-right">Status</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-outline-variant">
@@ -432,7 +432,7 @@ export default function UserDashboard() {
                               className="hover:bg-surface transition-colors group cursor-pointer"
                               onClick={() => navigate('/bookings')}
                             >
-                              <td className="px-md py-4">
+                              <td className="px-4 md:px-6 py-4">
                                 <div className="flex items-center gap-md">
                                   <div className="w-12 h-12 bg-surface rounded-xl overflow-hidden shadow-sm flex-shrink-0">
                                     <img className="w-full h-full object-cover" src={imgSrc} alt={cam?.name} />
@@ -445,15 +445,15 @@ export default function UserDashboard() {
                                   </div>
                                 </div>
                               </td>
-                              <td className="px-md py-4 font-body-md text-on-surface-variant hidden md:table-cell">
+                              <td className="px-4 md:px-6 py-4 font-body-md text-on-surface-variant hidden md:table-cell">
                                 {b.totalDays} Hari
                               </td>
-                              <td className="px-md py-4 hidden md:table-cell">
+                              <td className="px-4 md:px-6 py-4 hidden md:table-cell">
                                 <p className="font-label-bold text-primary">
                                   Rp {b.totalPrice?.toLocaleString('id-ID')}
                                 </p>
                               </td>
-                              <td className="px-md py-4 text-right pr-md">
+                              <td className="px-4 md:px-6 py-4 text-right">
                                 <StatusBadge status={b.status} />
                               </td>
                             </tr>
