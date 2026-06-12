@@ -34,7 +34,7 @@ export default function Home() {
         const res = await cameraAPI.getTop();
         if (res.data.success) {
           let fetchedCameras = res.data.data.cameras || [];
-          
+
           while (fetchedCameras.length < 3) {
             fetchedCameras.push({
               id: `empty-${fetchedCameras.length}`,
@@ -45,7 +45,7 @@ export default function Home() {
               isEmpty: true
             });
           }
-          
+
           setTopCameras(fetchedCameras);
         }
       } catch (err) {
@@ -70,8 +70,8 @@ export default function Home() {
   useEffect(() => {
     // Micro-interactions copied from script
     const elements = document.querySelectorAll('button, a');
-    const handleMouseDown = function() { this.style.transform = 'scale(0.96)'; };
-    const handleMouseUpLeave = function() { this.style.transform = ''; };
+    const handleMouseDown = function () { this.style.transform = 'scale(0.96)'; };
+    const handleMouseUpLeave = function () { this.style.transform = ''; };
 
     elements.forEach(el => {
       el.addEventListener('mousedown', handleMouseDown);
@@ -101,7 +101,7 @@ export default function Home() {
         </motion.div>
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-white/80 to-white"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center justify-between gap-12">
-          <motion.div 
+          <motion.div
             className="max-w-2xl"
             initial="hidden"
             animate="visible"
@@ -122,7 +122,7 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
-          <motion.div 
+          <motion.div
             className="w-full md:w-1/2 flex justify-center md:justify-end"
             style={{ y: logoY }}
             initial={{ opacity: 0, x: 50 }}
@@ -141,7 +141,7 @@ export default function Home() {
       {/* 2. Kategori Gear */}
       <section className="py-12 bg-white" id="katalog">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             className="grid grid-cols-2 lg:grid-cols-4 gap-6"
             initial="hidden"
             whileInView="visible"
@@ -185,8 +185,8 @@ export default function Home() {
             <h2 className="font-display text-4xl md:text-5xl mb-4 font-extrabold tracking-tight text-on-surface">Koleksi Terpopuler</h2>
             <p className="text-secondary text-lg mb-12 max-w-2xl mx-auto">Pilihan favorit para sinematografer profesional.</p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             key={topCameras.length}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
             initial="hidden"
@@ -196,7 +196,7 @@ export default function Home() {
           >
             {topCameras.map((prod, i) => (
               <motion.div key={i} variants={fadeUpVariant} className="flex h-full">
-                <FlipCard 
+                <FlipCard
                   title={prod.name}
                   desc={prod.brand}
                   rentedCount={prod.rentedCount || 0}
@@ -211,7 +211,7 @@ export default function Home() {
       {/* 4. Cara Kerja */}
       <section className="py-24 bg-surface" id="cara-kerja">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             className="text-center mb-16 max-w-2xl mx-auto"
             initial="hidden"
             whileInView="visible"
@@ -221,7 +221,7 @@ export default function Home() {
             <h2 className="font-display text-4xl md:text-5xl mb-4 font-extrabold tracking-tight text-on-surface">Cara Kerja</h2>
             <p className="text-secondary text-lg">Proses sewa profesional tanpa ribet. Fokus pada kreativitas Anda, biarkan kami urus logistiknya.</p>
           </motion.div>
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-12"
             initial="hidden"
             whileInView="visible"
@@ -244,7 +244,7 @@ export default function Home() {
       {/* 5. Tentang Lensify */}
       <section className="py-24 md:py-32 bg-white overflow-hidden" id="tentang-kami">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16">
-          <motion.div 
+          <motion.div
             className="w-full lg:w-1/2 rounded-3xl overflow-hidden shadow-2xl group"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -253,7 +253,7 @@ export default function Home() {
           >
             <img alt="Tentang Lensify" className="w-full h-full object-cover aspect-[4/3] group-hover:scale-105 transition-transform duration-1000" src="/tentangkami.png" />
           </motion.div>
-          <motion.div 
+          <motion.div
             className="w-full lg:w-1/2 space-y-8"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -305,7 +305,7 @@ export default function Home() {
       {/* 6. CTA Besar */}
       <section className="py-24 bg-primary text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
-        <motion.div 
+        <motion.div
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
           initial="hidden"
           whileInView="visible"
@@ -325,7 +325,7 @@ export default function Home() {
       {/* 7. Lokasi Toko */}
       <section className="py-24 bg-surface-container-low" id="lokasi">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
@@ -336,7 +336,7 @@ export default function Home() {
             <p className="text-secondary max-w-2xl mx-auto text-lg">Kunjungi store kami untuk konsultasi gear langsung dengan tim ahli kami.</p>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div 
+            <motion.div
               className="bg-white p-10 rounded-3xl shadow-sm border border-surface-variant hover:shadow-xl transition-shadow"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -347,7 +347,7 @@ export default function Home() {
               <div className="space-y-6 text-secondary">
                 <div className="flex items-start gap-4">
                   <span className="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-full">location_on</span>
-                  <p className="pt-2 leading-relaxed">Jl. Ciremai Raya No. 01, Perumnas,<br/>Kota Cirebon, 45142</p>
+                  <p className="pt-2 leading-relaxed">Jl. Ciremai Raya No. 01, Perumnas,<br />Kota Cirebon, 45142</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-full">schedule</span>
@@ -360,7 +360,7 @@ export default function Home() {
               </div>
               <button className="mt-10 w-full border-2 border-primary text-primary font-bold py-4 rounded-full hover:bg-primary hover:text-white transition-all outline-none hover:scale-105 active:scale-95 duration-200 focus:ring-4 focus:ring-primary/20">Petunjuk Arah Google Maps</button>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="aspect-[4/3] lg:aspect-video bg-surface-container rounded-3xl overflow-hidden relative border border-surface-variant shadow-sm"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}

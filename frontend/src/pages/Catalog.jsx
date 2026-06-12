@@ -6,7 +6,9 @@ import Loader from '../components/ui/Loader'
 
 export default function Catalog() {
   const token = useAuthStore(state => state.token)
+  const user = useAuthStore(state => state.user)
   const isAuthenticated = !!token && token !== 'null' && token !== 'undefined'
+  const backPath = isAuthenticated ? (user?.role === 'ADMIN' ? '/admin' : '/dashboard') : '/'
   const [searchParams, setSearchParams] = useSearchParams()
   const [cameras, setCameras] = useState([])
   const [loading, setLoading] = useState(true)
@@ -49,9 +51,9 @@ export default function Catalog() {
       {/* Page Header */}
       <header className="mb-xl">
         <div className="mb-md">
-          <Link to="/" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-surface-variant text-secondary hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-300 font-label-bold group">
+          <Link to={backPath} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-surface-variant text-secondary hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-300 font-label-bold group">
             <span className="material-symbols-outlined text-xl transition-transform group-hover:-translate-x-1">arrow_back</span>
-            <span className="uppercase tracking-wider text-xs">Kembali ke Beranda</span>
+            <span className="uppercase tracking-wider text-xs">{isAuthenticated ? 'Kembali ke Dashboard' : 'Kembali ke Beranda'}</span>
           </Link>
         </div>
         <h1 className="font-display-xl text-display-xl-mobile md:text-display-xl mb-sm uppercase leading-[1.1] text-primary">KATALOG GEAR PROFESIONAL</h1>
