@@ -468,8 +468,7 @@ export default function UserDashboard() {
 
           </div>
 
-          {/* Bottom spacer */}
-          <div className="h-xl" />
+          {/* Bottom spacer removed as per request */}
         </main>
       </div>
 

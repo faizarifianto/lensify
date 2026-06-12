@@ -346,8 +346,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Bottom spacer */}
-          <div className="h-8" />
+          {/* Bottom spacer removed as per request */}
         </main>
       </div>
     </div>
