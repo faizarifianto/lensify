@@ -233,7 +233,7 @@ export default function CategoryPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-lg">
+          <div className="flex items-center gap-md">
             <div className="flex items-center gap-md">
               <Link to="/dashboard" className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface" title="Dashboard">
                 home
@@ -255,7 +255,6 @@ export default function CategoryPage() {
                 )}
               </button>
             </div>
-            <div className="h-8 w-px bg-outline-variant" />
             <div className="flex items-center gap-sm pl-4 border-l border-outline-variant">
               <div className="text-right hidden md:block">
                 <p className="font-label-bold text-label-bold leading-none">{user?.name || 'User'}</p>

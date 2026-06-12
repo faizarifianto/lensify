@@ -136,7 +136,7 @@ export default function UserDashboard() {
           </div>
 
           {/* Right actions */}
-          <div className="flex items-center gap-lg">
+          <div className="flex items-center gap-md">
             <div className="flex items-center gap-md">
               <button
                 onClick={() => setCartOpen(true)}
@@ -158,8 +158,6 @@ export default function UserDashboard() {
                 notifications
               </Link>
             </div>
-
-            <div className="h-8 w-px bg-outline-variant" />
 
             <div className="flex items-center gap-sm pl-4 border-l border-outline-variant">
               <div className="text-right hidden md:block">

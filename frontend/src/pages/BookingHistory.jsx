@@ -501,7 +501,7 @@ export default function BookingHistory() {
             </div>
           </div>
 
-          <div className="flex items-center gap-lg">
+          <div className="flex items-center gap-md">
             <div className="flex items-center gap-md">
               <button
                 onClick={() => setCartOpen(true)}
@@ -522,7 +522,6 @@ export default function BookingHistory() {
                 )}
               </button>
             </div>
-            <div className="h-8 w-px bg-outline-variant" />
             <div className="flex items-center gap-sm pl-4 border-l border-outline-variant">
               <div className="text-right hidden md:block">
                 <p className="font-label-bold text-label-bold leading-none">{user?.name || 'User'}</p>
