@@ -6,6 +6,7 @@
   body {
     @apply bg-background text-on-background font-sans text-base antialiased;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 }
 

@@ -133,7 +133,7 @@ export default function Checkout() {
 
 
       {/* ── Body ── */}
-      <form onSubmit={handleSubmit} className="flex-1 max-w-7xl mx-auto w-full px-6 md:px-8 py-10 grid grid-cols-1 lg:grid-cols-5 gap-8 xl:gap-12">
+      <form onSubmit={handleSubmit} className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-8 py-6 md:py-10 grid grid-cols-1 lg:grid-cols-5 gap-8 xl:gap-12">
 
         {/* ── LEFT COLUMN ── */}
         <div className="lg:col-span-3 space-y-8">
@@ -205,13 +205,13 @@ export default function Checkout() {
               <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-bold">3</span>
               Upload Foto KTP <span className="text-red-500">*</span>
             </h2>
-            <p className="text-sm text-gray-500 mb-6 ml-11">Sesuai kebijakan keamanan, wajib melampirkan foto KTP penyewa yang masih berlaku.</p>
+            <p className="text-sm text-gray-500 mb-6 md:ml-11">Sesuai kebijakan keamanan, wajib melampirkan foto KTP penyewa yang masih berlaku.</p>
 
             <input type="file" name="ktp" accept="image/*" onChange={handleInputChange}
               ref={fileInputRef} className="hidden" />
 
             {ktpPreview ? (
-              <div className="relative group ml-11">
+              <div className="relative group md:ml-11">
                 <img src={ktpPreview} alt="Preview KTP" className="w-full h-56 object-cover rounded-2xl border border-gray-200" />
                 <button type="button"
                   onClick={() => { setKtpPreview(null); setFormData(prev => ({ ...prev, ktp: null })); fileInputRef.current.value = '' }}
@@ -224,7 +224,7 @@ export default function Checkout() {
               </div>
             ) : (
               <button type="button" onClick={() => fileInputRef.current?.click()}
-                className="w-full ml-11 w-[calc(100%-2.75rem)] h-44 border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center gap-3 text-gray-400 hover:border-primary hover:text-primary hover:bg-orange-50/50 transition-all group">
+                className="w-full md:ml-11 md:w-[calc(100%-2.75rem)] h-44 border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center gap-3 text-gray-400 hover:border-primary hover:text-primary hover:bg-orange-50/50 transition-all group">
                 <Image size={36} className="group-hover:scale-110 transition-transform opacity-60 group-hover:opacity-100" />
                 <div className="space-y-1">
                   <span className="text-base font-bold text-gray-600 group-hover:text-primary block">Klik untuk memilih foto dari perangkat</span>
@@ -280,7 +280,7 @@ export default function Checkout() {
 
             {/* Payment method */}
             <div>
-              <label className="block text-sm font-bold uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
+              <label className="flex text-sm font-bold uppercase tracking-wider text-gray-500 mb-4 items-center gap-2">
                 <CreditCard size={18} className="text-primary" /> Pilih Pembayaran
               </label>
               <div className="space-y-3">
@@ -309,8 +309,8 @@ export default function Checkout() {
               </div>
               <div className="border-t-2 border-dashed border-gray-200 mt-4 pt-4 flex justify-between items-center">
                 <span className="text-gray-800 font-bold">Total Pembayaran</span>
-                <span className="text-primary text-3xl font-black tracking-tight cursor-default" title={`Rp ${totalPrice.toLocaleString('id-ID')}`}>
-                  Rp <span className="text-4xl">{totalPrice.toLocaleString('id-ID')}</span>
+                <span className="text-primary text-2xl md:text-3xl font-black tracking-tight cursor-default" title={`Rp ${totalPrice.toLocaleString('id-ID')}`}>
+                  Rp <span className="text-3xl md:text-4xl">{totalPrice.toLocaleString('id-ID')}</span>
                 </span>
               </div>
             </div>

@@ -318,7 +318,7 @@ function InvoiceModal({ booking, onClose }) {
           <div className="border-t border-dashed border-gray-200" />
 
           {/* Billing Info */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Tagihan Kepada</p>
               <p className="font-bold text-gray-800">{booking.user?.name || '-'}</p>
@@ -350,8 +350,9 @@ function InvoiceModal({ booking, onClose }) {
           </div>
 
           {/* Item Table */}
-          <div className="rounded-2xl border border-gray-100 overflow-hidden">
-            <div className="bg-gray-50 grid grid-cols-12 px-4 py-3 text-[10px] font-black uppercase tracking-widest text-gray-400">
+          <div className="overflow-x-auto -mx-6 px-6 sm:mx-0 sm:px-0">
+            <div className="rounded-2xl border border-gray-100 overflow-hidden min-w-[500px]">
+              <div className="bg-gray-50 grid grid-cols-12 px-4 py-3 text-[10px] font-black uppercase tracking-widest text-gray-400">
               <div className="col-span-6">Item Sewa</div>
               <div className="col-span-2 text-center">Harga/Hari</div>
               <div className="col-span-2 text-center">Durasi</div>
@@ -385,10 +386,11 @@ function InvoiceModal({ booking, onClose }) {
             {/* Total Row */}
             <div className="grid grid-cols-12 px-4 py-4 bg-primary/5 border-t-2 border-primary/20">
               <div className="col-span-10 text-sm font-black uppercase tracking-wider text-primary">TOTAL PEMBAYARAN</div>
-              <div className="col-span-2 text-right font-black text-lg text-primary">
+              <div className="col-span-2 text-right font-black text-lg text-primary whitespace-nowrap">
                 Rp {booking.totalPrice?.toLocaleString('id-ID')}
               </div>
             </div>
+          </div>
           </div>
 
           {/* Note */}
@@ -483,9 +485,9 @@ export default function BookingHistory() {
       <div className="lg:ml-72 min-h-screen flex flex-col pt-14 lg:pt-0">
 
         {/* ── Top App Bar ────────────────────────────── */}
-        <header className="flex justify-between items-center h-20 px-6 md:px-margin-desktop sticky top-0 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40">
-          <div className="flex items-center gap-md">
-            <div className="relative">
+        <header className="flex justify-between items-center h-20 px-4 sm:px-6 md:px-margin-desktop sticky top-0 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40 gap-4">
+          <div className="flex items-center gap-md flex-1">
+            <div className="relative w-full sm:w-auto">
               <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">
                 search
               </span>
@@ -494,7 +496,7 @@ export default function BookingHistory() {
                 value={globalSearch}
                 onChange={(e) => { setGlobalSearch(e.target.value); setSearch(e.target.value) }}
                 placeholder="Cari gear..."
-                className="bg-surface border-none rounded-xl pl-10 pr-4 py-2.5 w-64 md:w-80 font-body-md focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                className="bg-surface border-none rounded-xl pl-10 pr-4 py-2.5 w-full sm:w-64 md:w-80 font-body-md focus:ring-2 focus:ring-primary/20 transition-all outline-none"
               />
             </div>
           </div>
@@ -725,7 +727,7 @@ export default function BookingHistory() {
                         </div>
 
                         {/* Price + Action */}
-                        <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-sm min-w-[140px] w-full md:w-auto">
+                        <div className="flex flex-row flex-wrap md:flex-col items-center md:items-end justify-between md:justify-center gap-sm min-w-[140px] w-full md:w-auto mt-4 md:mt-0 pt-4 md:pt-0 border-t border-outline-variant/30 md:border-0">
                           <div className="text-left md:text-right">
                             <p className="text-xs text-on-surface-variant uppercase tracking-wider">Total Bayar</p>
                             <p className={`font-headline-md text-xl ${booking.status === 'CANCELLED' ? 'text-on-surface-variant opacity-60' : 'text-primary'}`}>

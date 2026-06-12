@@ -82,13 +82,13 @@ export default function Catalog() {
               )}
             </div>
 
-            <div className="flex items-center gap-sm w-full md:w-auto flex-wrap">
-              <div className="flex items-center gap-sm">
-                <span className="font-label-sm text-label-sm uppercase whitespace-nowrap text-on-surface-variant">Kategori:</span>
+            <div className="flex flex-col sm:flex-row items-center gap-sm w-full md:w-auto flex-wrap">
+              <div className="flex items-center justify-between sm:justify-start gap-sm w-full sm:w-auto">
+                <span className="font-label-sm text-label-sm uppercase whitespace-nowrap text-on-surface-variant w-16 sm:w-auto">Kategori:</span>
                 <select 
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full md:w-48 bg-white border border-surface-variant rounded-full focus:border-primary focus:ring-1 focus:ring-primary/20 font-body-md py-sm px-md shadow-sm"
+                  className="flex-1 sm:w-48 bg-white border border-surface-variant rounded-full focus:border-primary focus:ring-1 focus:ring-primary/20 font-body-md py-sm px-md shadow-sm"
                 >
                   <option value="">Semua</option>
                   <option value="KAMERA">Kamera</option>
@@ -98,12 +98,12 @@ export default function Catalog() {
                 </select>
               </div>
               
-              <div className="flex items-center gap-sm">
-                <span className="font-label-sm text-label-sm uppercase whitespace-nowrap text-on-surface-variant">Urutkan:</span>
+              <div className="flex items-center justify-between sm:justify-start gap-sm w-full sm:w-auto">
+                <span className="font-label-sm text-label-sm uppercase whitespace-nowrap text-on-surface-variant w-16 sm:w-auto">Urutkan:</span>
                 <select 
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="w-full md:w-48 bg-white border border-surface-variant rounded-full focus:border-primary focus:ring-1 focus:ring-primary/20 font-body-md py-sm px-md shadow-sm"
+                  className="flex-1 sm:w-48 bg-white border border-surface-variant rounded-full focus:border-primary focus:ring-1 focus:ring-primary/20 font-body-md py-sm px-md shadow-sm"
                 >
                   <option value="price_asc">Harga Termurah</option>
                   <option value="price_desc">Harga Termahal</option>

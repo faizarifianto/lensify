@@ -107,7 +107,7 @@ export default function Home() {
             animate="visible"
             variants={fadeUpVariant}
           >
-            <h1 className="font-display text-5xl md:text-50xl mb-6 leading-tight font-extrabold text-on-surface tracking-tighter">
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight font-extrabold text-on-surface tracking-tighter">
               Bukan Sekadar Ngonten <br /><span className="text-primary">Ini Karya Visual</span>
             </h1>
             <p className="text-lg md:text-xl text-secondary mb-10 max-w-xl leading-relaxed">

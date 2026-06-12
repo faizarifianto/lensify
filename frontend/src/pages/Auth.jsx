@@ -259,8 +259,9 @@ const StyledWrapper = styled.div`
   /* card */ 
 
   .flip-card__inner {
-    width: 320px;
-    height: 580px;
+    width: min(320px, calc(100vw - 48px));
+    height: auto;
+    min-height: 480px;
     position: relative;
     background-color: transparent;
     perspective: 1000px;
@@ -278,7 +279,7 @@ const StyledWrapper = styled.div`
   }
 
   .flip-card__front, .flip-card__back {
-    padding: 30px;
+    padding: 24px;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -286,12 +287,19 @@ const StyledWrapper = styled.div`
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     background: #ffffff;
-    gap: 16px;
+    gap: 14px;
     border-radius: 12px;
     border: 2px solid var(--main-color);
     box-shadow: 6px 6px var(--main-color);
     width: 100%;
     height: 100%;
+  }
+
+  @media (min-width: 400px) {
+    .flip-card__front, .flip-card__back {
+      padding: 30px;
+      gap: 16px;
+    }
   }
 
   .flip-card__back {

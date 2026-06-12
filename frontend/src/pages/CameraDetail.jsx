@@ -195,7 +195,7 @@ export default function CameraDetail() {
           <ChevronLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" /> Kembali ke Katalog
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-10 xl:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-10 xl:gap-16 items-start">
 
           {/* ── LEFT: Image Gallery ── */}
           <div className="space-y-4">
@@ -264,14 +264,14 @@ export default function CameraDetail() {
             {/* Name & Brand */}
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60 mb-1">{camera.brand}</p>
-              <h1 className="font-display font-black text-4xl md:text-5xl text-on-surface leading-tight">{camera.name}</h1>
+              <h1 className="font-display font-black text-3xl md:text-4xl lg:text-5xl text-on-surface leading-tight">{camera.name}</h1>
             </div>
 
             {/* Price */}
             <div className="flex items-end gap-2 pb-5 border-b border-surface-variant">
               <div>
                 <p className="text-xs text-on-surface-variant mb-1 font-semibold">HARGA SEWA</p>
-                <span className="text-4xl font-black text-primary tracking-tight">
+                <span className="text-3xl md:text-4xl font-black text-primary tracking-tight">
                   Rp {camera.pricePerDay.toLocaleString('id-ID')}
                 </span>
                 <span className="text-on-surface-variant font-semibold text-sm ml-1">/ hari</span>
@@ -284,7 +284,7 @@ export default function CameraDetail() {
             )}
 
             {/* Benefits grid */}
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {[
                 { icon: <CheckCircle2 size={15} className="text-green-500" />, text: '100% Asuransi Aman' },
                 { icon: <Zap size={15} className="text-blue-500" />, text: 'Dukungan 24/7' },
