@@ -151,19 +151,7 @@ export default function UserSettings() {
       <div className="lg:ml-72 flex-grow min-h-screen flex flex-col w-full pt-14 lg:pt-0">
 
         {/* ── Top App Bar ─────────────────────────────────── */}
-        <header className="flex justify-between items-center h-20 px-4 sm:px-6 md:px-margin-desktop sticky top-0 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40 gap-4">
-          <div className="flex items-center gap-md flex-1">
-            <div className={`relative transition-transform w-full sm:w-auto duration-300 ${searchFocused ? 'scale-[1.01]' : ''}`}>
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-              <input
-                className="bg-surface border-none rounded-xl px-10 py-2.5 w-full sm:w-64 md:w-80 font-body-md focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                placeholder="Cari pengaturan..."
-                type="text"
-                onFocus={() => setSearchFocused(true)}
-                onBlur={() => setSearchFocused(false)}
-              />
-            </div>
-          </div>
+        <header className="flex justify-end items-center h-20 px-4 sm:px-6 md:px-margin-desktop sticky top-0 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40 gap-4">
           <div className="flex items-center gap-lg">
             <div className="flex items-center gap-sm pl-4">
               <div className="text-right hidden md:block">

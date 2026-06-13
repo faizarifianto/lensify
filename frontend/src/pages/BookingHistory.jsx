@@ -485,21 +485,7 @@ export default function BookingHistory() {
       <div className="lg:ml-72 min-h-screen flex flex-col pt-14 lg:pt-0">
 
         {/* ── Top App Bar ────────────────────────────── */}
-        <header className="flex justify-between items-center h-20 px-4 sm:px-6 md:px-margin-desktop sticky top-0 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40 gap-4">
-          <div className="flex items-center gap-md flex-1">
-            <div className="relative w-full sm:w-auto">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">
-                search
-              </span>
-              <input
-                type="text"
-                value={globalSearch}
-                onChange={(e) => { setGlobalSearch(e.target.value); setSearch(e.target.value) }}
-                placeholder="Cari gear..."
-                className="bg-surface border-none rounded-xl pl-10 pr-4 py-2.5 w-full sm:w-64 md:w-80 font-body-md focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-              />
-            </div>
-          </div>
+        <header className="flex justify-end items-center h-20 px-4 sm:px-6 md:px-margin-desktop sticky top-0 bg-white/80 backdrop-blur-md border-b border-outline-variant z-40 gap-4">
 
           <div className="flex items-center gap-md">
             <div className="flex items-center gap-md">
