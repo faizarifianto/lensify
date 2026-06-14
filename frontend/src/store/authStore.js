@@ -53,6 +53,21 @@ const useAuthStore = create((set, get) => ({
     }
   },
 
+  googleLogin: async (credential) => {
+    set({ isLoading: true })
+    try {
+      const res = await authAPI.googleLogin(credential)
+      const { user, token } = res.data.data
+      sessionStorage.setItem('lensify_token', token)
+      sessionStorage.setItem('lensify_user', JSON.stringify(user))
+      set({ user, token, isLoading: false, isInitialized: true })
+      return { success: true, user }
+    } catch (err) {
+      set({ isLoading: false })
+      return { success: false, message: err.response?.data?.message || 'Google login failed' }
+    }
+  },
+
   logout: () => {
     sessionStorage.removeItem('lensify_token')
     sessionStorage.removeItem('lensify_user')

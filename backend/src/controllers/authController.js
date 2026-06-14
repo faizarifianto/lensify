@@ -2,8 +2,10 @@ const { PrismaClient } = require('@prisma/client');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { z } = require('zod');
+const { OAuth2Client } = require('google-auth-library');
 
 const prisma = new PrismaClient();
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -74,6 +76,14 @@ const login = async (req, res) => {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
     }
 
+    // User registered via Google — no password set
+    if (!user.password) {
+      return res.status(401).json({ 
+        success: false, 
+        message: 'Akun ini terdaftar melalui Google. Silakan gunakan tombol "Masuk dengan Google".' 
+      });
+    }
+
     const isPasswordValid = await bcrypt.compare(data.password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ success: false, message: 'Invalid email or password' });
@@ -93,6 +103,78 @@ const login = async (req, res) => {
     }
     console.error('Login error:', error);
     res.status(500).json({ success: false, message: 'Server error' });
+  }
+};
+
+// POST /api/auth/google
+const googleLogin = async (req, res) => {
+  try {
+    const { credential } = req.body;
+
+    if (!credential) {
+      return res.status(400).json({ success: false, message: 'Google credential is required' });
+    }
+
+    // Verify the Google ID token
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { sub: googleId, email, name, picture } = payload;
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: 'Unable to get email from Google account' });
+    }
+
+    // Check if user exists by email or googleId
+    let user = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email: email },
+          { googleId: googleId }
+        ]
+      }
+    });
+
+    if (user) {
+      // If user exists but doesn't have googleId linked yet, update it
+      if (!user.googleId) {
+        user = await prisma.user.update({
+          where: { id: user.id },
+          data: { googleId: googleId, avatar: user.avatar || picture || null }
+        });
+      }
+    } else {
+      // Create a new user (no password, registered via Google)
+      user = await prisma.user.create({
+        data: {
+          name: name || 'Google User',
+          email: email,
+          googleId: googleId,
+          avatar: picture || null,
+          password: null,
+        }
+      });
+    }
+
+    const token = generateToken(user.id, user.role);
+    const { password, ...userWithoutPassword } = user;
+
+    res.json({
+      success: true,
+      message: 'Google login successful',
+      data: { user: userWithoutPassword, token }
+    });
+  } catch (error) {
+    console.error('Google login error:', error);
+
+    if (error.message?.includes('Token used too late') || error.message?.includes('Invalid token')) {
+      return res.status(401).json({ success: false, message: 'Google token is invalid or expired. Please try again.' });
+    }
+
+    res.status(500).json({ success: false, message: 'Google authentication failed. Please try again.' });
   }
 };
 
@@ -137,4 +219,4 @@ const updateProfile = async (req, res) => {
   }
 };
 
-module.exports = { register, login, getMe, updateProfile };
+module.exports = { register, login, googleLogin, getMe, updateProfile };
