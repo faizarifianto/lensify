@@ -431,6 +431,80 @@ Akses ke:
         └─────────────┘     └──────────────┘
 ```
 
+### Flow Google Login
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant G as Google
+    participant B as Backend
+    participant DB as Database
+
+    U->>F: Klik "Masuk dengan Google"
+    F->>G: Buka popup Google OAuth
+    G->>U: Pilih akun Google
+    U->>G: Konfirmasi
+    G->>F: Return credential (ID token)
+    F->>B: POST /api/auth/google {credential}
+    B->>G: Verifikasi ID token
+    G->>B: Return user info (email, name, picture)
+    B->>DB: Cek user by email/googleId
+    alt User sudah ada
+        DB->>B: Return existing user
+    else User baru
+        B->>DB: Create new user
+        DB->>B: Return new user
+    end
+    B->>F: Return JWT token + user data
+    F->>U: Redirect ke Dashboard
+```
+
+---
+
+## 🔐 Autentikasi & Google Login
+
+Lensify mendukung autentikasi menggunakan email/password standar dan juga **Login dengan Google** (menggunakan OAuth 2.0 via Google Identity Services).
+
+### 🔑 Panduan Mendapatkan Google Client ID
+
+> **PENTING:** Fitur Google Login **TIDAK AKAN BERFUNGSI** sampai Anda memasukkan Google Client ID yang valid ke file `.env` di backend dan frontend.
+
+#### Langkah-langkah:
+
+1. **Buka Google Cloud Console**
+   - Kunjungi **[https://console.cloud.google.com/](https://console.cloud.google.com/)** dan login dengan akun Google Anda.
+2. **Buat Project Baru**
+   - Klik dropdown project di pojok kiri atas, klik **"New Project"**, beri nama (misal: "Lensify"), lalu klik **"Create"**.
+3. **Konfigurasi OAuth Consent Screen**
+   - Buka **APIs & Services** → **OAuth consent screen**.
+   - Pilih **External** → klik **Create**.
+   - Isi form (*App name*, *User support email*, *Developer contact email*) lalu **Save and Continue** sampai selesai.
+4. **Buat OAuth 2.0 Client ID**
+   - Buka **APIs & Services** → **Credentials**.
+   - Klik **"+ CREATE CREDENTIALS"** → **"OAuth client ID"**.
+   - Pilih **Application type**: **Web application**.
+   - Di **Authorized JavaScript origins**, tambahkan: `http://localhost:5173`
+   - Di **Authorized redirect URIs**, tambahkan: `http://localhost:5173`
+   - Klik **"Create"**.
+5. **Copy Client ID**
+   - Copy teks Client ID yang diberikan (format: `xxxxx.apps.googleusercontent.com`).
+6. **Masukkan ke File .env**
+   - Edit `backend/.env` dan `frontend/.env`, tambahkan:
+     ```env
+     # backend/.env
+     GOOGLE_CLIENT_ID=xxxxx.apps.googleusercontent.com
+     
+     # frontend/.env
+     VITE_GOOGLE_CLIENT_ID=xxxxx.apps.googleusercontent.com
+     ```
+7. **Restart Server**
+
+### Catatan Penting
+
+> - User yang register via **Google** tidak memiliki password. Jika mereka mencoba login via form email/password, akan muncul pesan: *"Akun ini terdaftar melalui Google. Silakan gunakan tombol Masuk dengan Google."*
+> - Jika user sudah punya akun (register biasa) lalu login via Google dengan **email yang sama**, akun akan otomatis terhubung (linked) dengan Google.
+
 ---
 
 ## 🚀 Instalasi & Menjalankan Project
@@ -505,12 +579,14 @@ npm run dev
 | `JWT_SECRET` | Secret key untuk signing JWT token | *(wajib diisi)* |
 | `JWT_EXPIRES_IN` | Masa berlaku token | `7d` |
 | `PORT` | Port backend server | `5000` |
+| `GOOGLE_CLIENT_ID` | OAuth 2.0 Client ID dari Google Cloud | *(wajib untuk fitur Google Login)* |
 
 ### Frontend (`frontend/.env`)
 
 | Variable | Deskripsi | Default |
 |----------|-----------|---------|
 | `VITE_API_BASE_URL` | Base URL API backend | `http://localhost:5000/api` |
+| `VITE_GOOGLE_CLIENT_ID`| OAuth 2.0 Client ID (sama dengan backend)| *(wajib untuk fitur Google Login)* |
 
 ---
 
